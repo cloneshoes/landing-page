@@ -1,0 +1,7 @@
+:root {
+  --color-primary: 220 90% 56%; /* example HSL-ish token for use with color functions */
+}
+
+
+/* import Tailwind (v4 prefers this style) */
+@import "tailwindcss";
