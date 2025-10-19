@@ -10,7 +10,7 @@ export default function About() {
           src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" // placeholder – replace with your photo
           alt="Uche Igwe"
           className="w-48 h-48 rounded-full object-cover border-4 border-sky-500 dark:border-sky-400 shadow-lg"
-        />
+        />  
       </div>
 
       {/* Text Content */}

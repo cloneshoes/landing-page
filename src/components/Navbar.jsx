@@ -1,57 +1,55 @@
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Load saved theme or default to dark
+    return localStorage.getItem("theme") === "light" ? false : true;
+  });
 
-  // keep body class synced for Tailwind's dark: utilities
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
   }, [darkMode]);
 
   return (
-    <header className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
-      <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <nav className="fixed w-full top-0 left-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-sm z-50 transition-colors duration-500">
+      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        {/* Logo */}
         <h1 className="text-2xl font-bold text-sky-600 dark:text-sky-400">
-          Tailwind v4 Demo
+          My Portfolio
         </h1>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6">
-          <a href="#" className="hover:text-sky-600">Home</a>
-          <a href="#" className="hover:text-sky-600">Docs</a>
-          <a href="#" className="hover:text-sky-600">About</a>
-        </nav>
+        {/* Nav Links */}
+        <div className="hidden md:flex space-x-6 text-slate-700 dark:text-slate-300">
+          <a href="#about" className="hover:text-sky-600 dark:hover:text-sky-400 transition">
+            About
+          </a>
+          <a href="#projects" className="hover:text-sky-600 dark:hover:text-sky-400 transition">
+            Projects
+          </a>
+          <a href="#contact" className="hover:text-sky-600 dark:hover:text-sky-400 transition">
+            Contact
+          </a>
+        </div>
 
-        {/* Dark-Mode Toggle */}
+        {/* Toggle Button */}
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="ml-4 p-2 rounded-md border dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800"
+          className="p-2 rounded-md border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
           aria-label="Toggle dark mode"
         >
-          {darkMode ? "🌙" : "☀️"}
-        </button>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden ml-2 p-2"
-          aria-label="Toggle menu"
-        >
-          ☰
+          {darkMode ? (
+            <i className="fa-solid fa-sun text-yellow-400"></i>
+          ) : (
+            <i className="fa-solid fa-moon text-slate-600"></i>
+          )}
         </button>
       </div>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-          <nav className="flex flex-col p-4 space-y-2">
-            <a href="#" className="hover:text-sky-600">Home</a>
-            <a href="#" className="hover:text-sky-600">Docs</a>
-            <a href="#" className="hover:text-sky-600">About</a>
-          </nav>
-        </div>
-      )}
-    </header>
+    </nav>
   );
 }

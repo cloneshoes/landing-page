@@ -9,7 +9,7 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-500">
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-500 font-inter">
       <Navbar />
       {/* ===== HERO SECTION ===== */}
       <section className="max-w-6xl mx-auto px-6 pt-20 pb-24 text-center">
