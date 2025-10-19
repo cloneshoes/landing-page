@@ -1,7 +1,30 @@
+/* import Tailwind (v4 prefers this style) */
+@import "tailwindcss";
+
+
 :root {
   --color-primary: 220 90% 56%; /* example HSL-ish token for use with color functions */
 }
 
 
-/* import Tailwind (v4 prefers this style) */
-@import "tailwindcss";
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.project-card {
+  animation: fadeUp 0.8s ease-out both;
+}
+
+.about-fade {
+  animation: fadeIn 0.8s ease-in both;
+}
